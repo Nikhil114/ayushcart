@@ -1,16 +1,18 @@
 import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
 
-const api = new WooCommerceRestApi({
-  url: process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "https://example.com",
-  consumerKey: process.env.WOOCOMMERCE_KEY || "",
-  consumerSecret: process.env.WOOCOMMERCE_SECRET || "",
-  version: "wc/v3",
-});
-
-export default api;
+// Initialize API lazily to avoid build-time errors if variables are missing
+const getWooCommerceApi = () => {
+  return new WooCommerceRestApi({
+    url: process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "https://example.com",
+    consumerKey: process.env.WOOCOMMERCE_KEY || "",
+    consumerSecret: process.env.WOOCOMMERCE_SECRET || "",
+    version: "wc/v3",
+  });
+};
 
 export async function getProducts(params = {}) {
   try {
+    const api = getWooCommerceApi();
     const response = await api.get("products", {
       per_page: 20,
       ...params,
@@ -24,6 +26,7 @@ export async function getProducts(params = {}) {
 
 export async function getProductBySlug(slug: string) {
   try {
+    const api = getWooCommerceApi();
     const response = await api.get("products", {
       slug,
     });
@@ -36,6 +39,7 @@ export async function getProductBySlug(slug: string) {
 
 export async function getCategories() {
   try {
+    const api = getWooCommerceApi();
     const response = await api.get("products/categories", {
       per_page: 100,
     });
@@ -45,8 +49,10 @@ export async function getCategories() {
     return [];
   }
 }
+
 export async function createOrder(data: any) {
   try {
+    const api = getWooCommerceApi();
     const response = await api.post("orders", data);
     return response.data;
   } catch (error) {
