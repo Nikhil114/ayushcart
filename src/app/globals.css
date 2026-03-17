@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #471941;
+  --color-primary-light: #6A1B6D;
+  --color-secondary: #D4A373;
+  --color-accent: #A64B59;
+  --color-cream: #FDFBF7;
+  --color-gold: #F6C768;
+  --color-sage: #7A8450;
+  
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+}
+
+:root {
+  --background: #FDFBF7;
+  --foreground: #471941;
+  --primary: #471941;
+  color-scheme: light;
+}
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-montserrat {
+  font-family: var(--font-montserrat);
+}
